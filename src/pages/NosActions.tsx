@@ -3,50 +3,32 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TreePine, BookOpen, Heart, Users, Video, Image as ImageIcon, MessageSquare } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import treeImage from "@/assets/tree-planting.jpg";
+import educationImage from "@/assets/education-aid.jpg";
+import healthImage from "@/assets/health-campaign.jpg";
 
 const NosActions = () => {
-  const actions = [
-    {
-      id: 1,
-      categorie: "Environnement",
-      titre: "Reboisement de Gandiaye",
-      description: "Plantation de 500 arbres avec la participation de 100 bénévoles",
-      date: "Mars 2024",
-      impact: "500 arbres plantés",
-      icon: TreePine,
-      mediaType: "video"
-    },
-    {
-      id: 2,
-      categorie: "Éducation",
-      titre: "Distribution de fournitures scolaires",
-      description: "200 élèves ont reçu des kits scolaires complets",
-      date: "Octobre 2023",
-      impact: "200 élèves équipés",
-      icon: BookOpen,
-      mediaType: "image"
-    },
-    {
-      id: 3,
-      categorie: "Social",
-      titre: "Aide aux familles démunies",
-      description: "Distribution de denrées alimentaires à 50 familles",
-      date: "Décembre 2023",
-      impact: "50 familles aidées",
-      icon: Heart,
-      mediaType: "image"
-    },
-    {
-      id: 4,
-      categorie: "Santé",
-      titre: "Campagne de sensibilisation",
-      description: "Sensibilisation sur l'hygiène et la prévention des maladies",
-      date: "Janvier 2024",
-      impact: "300 personnes sensibilisées",
-      icon: Users,
-      mediaType: "video"
-    },
-  ];
+  const { data: actions = [] } = useQuery({
+    queryKey: ['actions'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('actions')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      return data;
+    }
+  });
+
+  const getActionImage = (categorie: string) => {
+    if (categorie === "Environnement") return treeImage;
+    if (categorie === "Éducation") return educationImage;
+    if (categorie === "Santé") return healthImage;
+    return treeImage;
+  };
 
   const temoignages = [
     {
@@ -82,7 +64,7 @@ const NosActions = () => {
       
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-16 px-4 bg-gradient-to-br from-primary/10 to-secondary/10">
+        <section className="py-16 px-4 bg-muted">
           <div className="container mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Nos Actions</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -92,7 +74,7 @@ const NosActions = () => {
         </section>
 
         {/* Stats */}
-        <section className="py-16 px-4 bg-muted/50">
+        <section className="py-16 px-4 bg-background">
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">Notre Impact</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -126,13 +108,15 @@ const NosActions = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {actions.map((action) => (
                     <Card key={action.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                      <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                        {action.mediaType === "video" && <Video className="h-16 w-16 text-primary" />}
-                        {action.mediaType === "image" && <ImageIcon className="h-16 w-16 text-secondary" />}
+                      <div className="aspect-video overflow-hidden">
+                        <img 
+                          src={getActionImage(action.categorie)} 
+                          alt={action.titre}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <CardContent className="p-6">
                         <div className="flex items-center gap-2 mb-2">
-                          <action.icon className="h-5 w-5 text-primary" />
                           <span className="text-xs font-medium text-primary">{action.categorie}</span>
                         </div>
                         <h3 className="font-semibold text-lg mb-2">{action.titre}</h3>
@@ -149,10 +133,14 @@ const NosActions = () => {
 
               <TabsContent value="videos">
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {actions.filter(a => a.mediaType === "video").map((action) => (
+                  {actions.filter(a => a.media_type === "video").map((action) => (
                     <Card key={action.id} className="overflow-hidden">
-                      <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                        <Video className="h-16 w-16 text-primary" />
+                      <div className="aspect-video overflow-hidden">
+                        <img 
+                          src={getActionImage(action.categorie)} 
+                          alt={action.titre}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <CardContent className="p-6">
                         <h3 className="font-semibold mb-2">{action.titre}</h3>
@@ -165,10 +153,14 @@ const NosActions = () => {
 
               <TabsContent value="photos">
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {actions.filter(a => a.mediaType === "image").map((action) => (
+                  {actions.filter(a => a.media_type === "image").map((action) => (
                     <Card key={action.id} className="overflow-hidden">
-                      <div className="aspect-video bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center">
-                        <ImageIcon className="h-16 w-16 text-secondary" />
+                      <div className="aspect-video overflow-hidden">
+                        <img 
+                          src={getActionImage(action.categorie)} 
+                          alt={action.titre}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <CardContent className="p-6">
                         <h3 className="font-semibold mb-2">{action.titre}</h3>

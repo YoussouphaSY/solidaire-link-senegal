@@ -14,7 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      actions: {
+        Row: {
+          categorie: string
+          created_at: string | null
+          date: string
+          description: string
+          id: string
+          impact: string
+          media_type: string
+          media_url: string | null
+          titre: string
+          updated_at: string | null
+        }
+        Insert: {
+          categorie: string
+          created_at?: string | null
+          date: string
+          description: string
+          id?: string
+          impact: string
+          media_type: string
+          media_url?: string | null
+          titre: string
+          updated_at?: string | null
+        }
+        Update: {
+          categorie?: string
+          created_at?: string | null
+          date?: string
+          description?: string
+          id?: string
+          impact?: string
+          media_type?: string
+          media_url?: string | null
+          titre?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      actualites: {
+        Row: {
+          created_at: string | null
+          date: string
+          description: string
+          id: string
+          image_url: string | null
+          titre: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          date: string
+          description: string
+          id?: string
+          image_url?: string | null
+          titre: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          date?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          titre?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          message: string
+          nom: string
+          region: string | null
+          telephone: string | null
+          type: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          message: string
+          nom: string
+          region?: string | null
+          telephone?: string | null
+          type: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string
+          nom?: string
+          region?: string | null
+          telephone?: string | null
+          type?: string
+        }
+        Relationships: []
+      }
+      contributions: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          message: string | null
+          nom: string
+          telephone: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          message?: string | null
+          nom: string
+          telephone?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string | null
+          nom?: string
+          telephone?: string | null
+        }
+        Relationships: []
+      }
+      newsletter_subscribers: {
+        Row: {
+          email: string
+          id: string
+          subscribed_at: string | null
+        }
+        Insert: {
+          email: string
+          id?: string
+          subscribed_at?: string | null
+        }
+        Update: {
+          email?: string
+          id?: string
+          subscribed_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

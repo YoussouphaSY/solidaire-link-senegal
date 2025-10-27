@@ -6,22 +6,51 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
-  const { toast } = useToast();
   const [formType, setFormType] = useState<"contact" | "adhesion">("contact");
+  const [formData, setFormData] = useState({
+    nom: "",
+    email: "",
+    telephone: "",
+    region: "",
+    message: ""
+  });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: formType === "contact" ? "Message envoyé !" : "Demande d'adhésion reçue !",
-      description: formType === "contact" 
-        ? "Nous vous répondrons dans les plus brefs délais."
-        : "Nous vous contacterons prochainement pour finaliser votre adhésion.",
-    });
+    setLoading(true);
+
+    try {
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([{ ...formData, type: formType }]);
+
+      if (error) throw error;
+
+      toast.success(
+        formType === 'adhesion' 
+          ? "Demande d'adhésion envoyée avec succès! Nous vous contacterons bientôt." 
+          : "Message envoyé avec succès! Nous vous répondrons rapidement."
+      );
+      setFormData({
+        nom: "",
+        email: "",
+        telephone: "",
+        region: "",
+        message: ""
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error("Une erreur est survenue. Veuillez réessayer.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -30,7 +59,7 @@ const Contact = () => {
       
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-16 px-4 bg-gradient-to-br from-primary/10 to-secondary/10">
+        <section className="py-16 px-4 bg-muted">
           <div className="container mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact & Adhésion</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -112,44 +141,49 @@ const Contact = () => {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                       <Label htmlFor="nom">Nom complet *</Label>
-                      <Input id="nom" placeholder="Votre nom" required />
+                      <Input 
+                        id="nom" 
+                        placeholder="Votre nom" 
+                        value={formData.nom}
+                        onChange={(e) => setFormData({ ...formData, nom: e.target.value })}
+                        required 
+                      />
                     </div>
 
                     <div>
                       <Label htmlFor="email">Email *</Label>
-                      <Input id="email" type="email" placeholder="votre@email.com" required />
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        placeholder="votre@email.com" 
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        required 
+                      />
                     </div>
 
                     <div>
                       <Label htmlFor="telephone">Téléphone *</Label>
-                      <Input id="telephone" type="tel" placeholder="+221 XX XXX XX XX" required />
+                      <Input 
+                        id="telephone" 
+                        type="tel" 
+                        placeholder="+221 XX XXX XX XX" 
+                        value={formData.telephone}
+                        onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}
+                        required 
+                      />
                     </div>
 
                     {formType === "adhesion" && (
-                      <>
-                        <div>
-                          <Label htmlFor="region">Région</Label>
-                          <Input id="region" placeholder="Votre région" />
-                        </div>
-
-                        <div>
-                          <Label>Moyen de paiement préféré</Label>
-                          <RadioGroup defaultValue="wave" className="mt-2">
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="wave" id="wave-adhesion" />
-                              <Label htmlFor="wave-adhesion" className="cursor-pointer">Wave</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="orange" id="orange-adhesion" />
-                              <Label htmlFor="orange-adhesion" className="cursor-pointer">Orange Money</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="especes" id="especes" />
-                              <Label htmlFor="especes" className="cursor-pointer">Espèces</Label>
-                            </div>
-                          </RadioGroup>
-                        </div>
-                      </>
+                      <div>
+                        <Label htmlFor="region">Région</Label>
+                        <Input 
+                          id="region" 
+                          placeholder="Votre région" 
+                          value={formData.region}
+                          onChange={(e) => setFormData({ ...formData, region: e.target.value })}
+                        />
+                      </div>
                     )}
 
                     <div>
@@ -160,12 +194,18 @@ const Contact = () => {
                           ? "Votre message..." 
                           : "Pourquoi souhaitez-vous rejoindre Union Solidaire ?"}
                         rows={5}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         required
                       />
                     </div>
 
-                    <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
-                      {formType === "contact" ? "Envoyer le message" : "Envoyer la demande"}
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-primary hover:bg-primary/90"
+                      disabled={loading}
+                    >
+                      {loading ? "Envoi en cours..." : (formType === "contact" ? "Envoyer le message" : "Envoyer la demande")}
                     </Button>
                   </form>
                 </CardContent>
@@ -218,7 +258,7 @@ const Contact = () => {
                   </Card>
                 )}
 
-                <Card className="bg-gradient-to-br from-primary to-secondary text-white border-none">
+                <Card className="bg-primary text-white border-none">
                   <CardContent className="p-6 text-center">
                     <MessageCircle className="h-12 w-12 mx-auto mb-4" />
                     <h3 className="font-semibold text-lg mb-2">Besoin d'aide ?</h3>
