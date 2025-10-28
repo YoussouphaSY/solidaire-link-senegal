@@ -9,6 +9,7 @@ import NosActions from "./pages/NosActions";
 import ActionDetails from "./pages/ActionDetails";
 import Contribuer from "./pages/Contribuer";
 import Actualites from "./pages/Actualites";
+import ActualiteDetails from "./pages/ActualiteDetails";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/nos-actions/:id" element={<ActionDetails />} />
           <Route path="/contribuer" element={<Contribuer />} />
           <Route path="/actualites" element={<Actualites />} />
+          <Route path="/actualites/:id" element={<ActualiteDetails />} />
           <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -57,23 +57,27 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden border-t bg-background">
-          <div className="container mx-auto px-4 py-4 space-y-3">
+        <div className="md:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 animate-fade-in">
+          <div className="container mx-auto px-4 py-6 space-y-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`block py-2 text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(link.path) ? "text-primary" : "text-foreground/80"
+                className={`block py-3 px-4 text-base font-medium transition-all rounded-lg hover:bg-muted ${
+                  isActive(link.path) ? "text-primary bg-muted" : "text-foreground"
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <Link to="/contribuer" onClick={() => setIsMenuOpen(false)}>
-              <Button className="w-full bg-primary hover:bg-primary/90">Faire un don</Button>
-            </Link>
+            <div className="pt-4">
+              <Link to="/contribuer" onClick={() => setIsMenuOpen(false)}>
+                <Button className="w-full bg-primary hover:bg-primary/90" size="lg">
+                  Faire un don
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       )}

@@ -55,49 +55,157 @@ const Index = () => {
             }}
             plugins={[
               Autoplay({
-                delay: 5000,
+                delay: 6000,
               }),
             ]}
             className="w-full"
           >
             <CarouselContent>
-              {[heroImage, treeImage, educationImage, healthImage].map((image, index) => (
-                <CarouselItem key={index}>
-                  <div className="relative h-[500px] md:h-[600px]">
-                    <div className="absolute inset-0">
-                      <img 
-                        src={image} 
-                        alt={`Union Solidaire action ${index + 1}`}
-                        className="w-full h-full object-cover brightness-50"
-                      />
-                    </div>
-                    <div className="container mx-auto text-center space-y-8 relative z-10 h-full flex flex-col justify-center px-4">
-                      <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
-                        Unis pour aider,<br />
-                        <span className="text-primary">solidaire pour changer</span>
-                      </h1>
-                      <p className="text-xl text-white/90 max-w-2xl mx-auto">
-                        Rejoignez-nous dans notre mission de solidarité et de changement positif à Gandiaye et au-delà.
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link to="/contact">
-                          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
-                            Rejoindre l'association
-                          </Button>
-                        </Link>
-                        <Link to="/contribuer">
-                          <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                            Faire un don
-                          </Button>
-                        </Link>
-                      </div>
+              <CarouselItem>
+                <div className="relative h-[500px] md:h-[600px]">
+                  <div className="absolute inset-0">
+                    <img 
+                      src={heroImage} 
+                      alt="Union Solidaire solidarité"
+                      className="w-full h-full object-cover brightness-50"
+                    />
+                  </div>
+                  <div className="container mx-auto text-center space-y-6 relative z-10 h-full flex flex-col justify-center px-4">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white animate-fade-in">
+                      Ensemble pour un avenir meilleur
+                    </h1>
+                    <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+                      Construisons une communauté solidaire à Gandiaye
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Link to="/contact">
+                        <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
+                          Rejoindre l'association
+                        </Button>
+                      </Link>
+                      <Link to="/contribuer">
+                        <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                          Faire un don
+                        </Button>
+                      </Link>
                     </div>
                   </div>
-                </CarouselItem>
-              ))}
+                </div>
+              </CarouselItem>
+
+              <CarouselItem>
+                <div className="relative h-[500px] md:h-[600px]">
+                  <div className="absolute inset-0 bg-black">
+                    <video 
+                      src="https://kmacqgbyltcpgdhudenp.supabase.co/storage/v1/object/public/videos/sample-video.mp4"
+                      className="w-full h-full object-cover opacity-70"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  </div>
+                  <div className="container mx-auto text-center space-y-6 relative z-10 h-full flex flex-col justify-center px-4">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white animate-fade-in">
+                      L'action en mouvement
+                    </h1>
+                    <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+                      Découvrez nos actions sur le terrain
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Link to="/nos-actions">
+                        <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
+                          Voir nos actions
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem>
+                <div className="relative h-[500px] md:h-[600px]">
+                  <div className="absolute inset-0">
+                    <img 
+                      src={treeImage} 
+                      alt="Reboisement et environnement"
+                      className="w-full h-full object-cover brightness-50"
+                    />
+                  </div>
+                  <div className="container mx-auto text-center space-y-6 relative z-10 h-full flex flex-col justify-center px-4">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white animate-fade-in">
+                      Préservons notre environnement
+                    </h1>
+                    <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+                      Plus de 5000 arbres plantés pour les générations futures
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Link to="/nos-actions">
+                        <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
+                          Nos actions environnement
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem>
+                <div className="relative h-[500px] md:h-[600px]">
+                  <div className="absolute inset-0">
+                    <img 
+                      src={educationImage} 
+                      alt="Éducation et formation"
+                      className="w-full h-full object-cover brightness-50"
+                    />
+                  </div>
+                  <div className="container mx-auto text-center space-y-6 relative z-10 h-full flex flex-col justify-center px-4">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white animate-fade-in">
+                      Éduquons pour l'avenir
+                    </h1>
+                    <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+                      500+ élèves soutenus dans leur parcours scolaire
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Link to="/nos-actions">
+                        <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
+                          Nos actions éducation
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem>
+                <div className="relative h-[500px] md:h-[600px]">
+                  <div className="absolute inset-0">
+                    <img 
+                      src={healthImage} 
+                      alt="Santé et bien-être"
+                      className="w-full h-full object-cover brightness-50"
+                    />
+                  </div>
+                  <div className="container mx-auto text-center space-y-6 relative z-10 h-full flex flex-col justify-center px-4">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white animate-fade-in">
+                      La santé pour tous
+                    </h1>
+                    <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+                      Campagnes de sensibilisation et soutien médical
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Link to="/nos-actions">
+                        <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
+                          Nos actions santé
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious className="left-4" />
-            <CarouselNext className="right-4" />
+            <CarouselPrevious className="left-2 md:left-4" />
+            <CarouselNext className="right-2 md:right-4" />
           </Carousel>
         </section>
 
@@ -131,29 +239,25 @@ const Index = () => {
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               {recentActions.map((action) => (
                 <Link key={action.id} to={`/nos-actions/${action.id}`}>
-                  <Card className="overflow-hidden hover:shadow-lg transition-all h-full">
+                  <Card className="overflow-hidden hover:shadow-lg transition-all h-full group">
                     <div className="aspect-video overflow-hidden">
                       {action.media_type === "video" && action.media_url ? (
                         <video 
                           src={action.media_url} 
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           muted
                         />
                       ) : action.media_url ? (
                         <img 
                           src={action.media_url} 
                           alt={action.titre}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
-                      ) : (
-                        <div className="w-full h-full bg-muted flex items-center justify-center">
-                          <span className="text-4xl">{action.categorie === "Environnement" ? "🌳" : action.categorie === "Éducation" ? "📚" : "❤️"}</span>
-                        </div>
-                      )}
+                      ) : null}
                     </div>
                     <CardContent className="p-6">
                       <span className="text-xs font-medium text-primary">{action.categorie}</span>
-                      <h3 className="font-semibold mb-2 mt-1">{action.titre}</h3>
+                      <h3 className="font-semibold mb-2 mt-1 text-lg">{action.titre}</h3>
                       <p className="text-sm text-muted-foreground line-clamp-2">{action.description}</p>
                     </CardContent>
                   </Card>
