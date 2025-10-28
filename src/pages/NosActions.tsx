@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TreePine, BookOpen, Heart, Users, Video, Image as ImageIcon, MessageSquare } from "lucide-react";
+import { TreePine, BookOpen, Heart, Users, MessageSquare } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import treeImage from "@/assets/tree-planting.jpg";
@@ -107,26 +108,42 @@ const NosActions = () => {
               <TabsContent value="all" className="space-y-6">
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {actions.map((action) => (
-                    <Card key={action.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                      <div className="aspect-video overflow-hidden">
-                        <img 
-                          src={getActionImage(action.categorie)} 
-                          alt={action.titre}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-medium text-primary">{action.categorie}</span>
+                    <Link key={action.id} to={`/nos-actions/${action.id}`}>
+                      <Card className="overflow-hidden hover:shadow-lg transition-all h-full">
+                        <div className="aspect-video overflow-hidden">
+                          {action.media_type === "video" && action.media_url ? (
+                            <video 
+                              src={action.media_url} 
+                              className="w-full h-full object-cover"
+                              muted
+                            />
+                          ) : action.media_url ? (
+                            <img 
+                              src={action.media_url} 
+                              alt={action.titre}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <img 
+                              src={getActionImage(action.categorie)} 
+                              alt={action.titre}
+                              className="w-full h-full object-cover"
+                            />
+                          )}
                         </div>
-                        <h3 className="font-semibold text-lg mb-2">{action.titre}</h3>
-                        <p className="text-sm text-muted-foreground mb-4">{action.description}</p>
-                        <div className="flex justify-between text-xs text-muted-foreground">
-                          <span>{action.date}</span>
-                          <span className="font-medium text-primary">{action.impact}</span>
-                        </div>
-                      </CardContent>
-                    </Card>
+                        <CardContent className="p-6">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-medium text-primary">{action.categorie}</span>
+                          </div>
+                          <h3 className="font-semibold text-lg mb-2">{action.titre}</h3>
+                          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{action.description}</p>
+                          <div className="flex justify-between text-xs text-muted-foreground">
+                            <span>{action.date}</span>
+                            <span className="font-medium text-primary">{action.impact}</span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   ))}
                 </div>
               </TabsContent>
@@ -134,19 +151,29 @@ const NosActions = () => {
               <TabsContent value="videos">
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {actions.filter(a => a.media_type === "video").map((action) => (
-                    <Card key={action.id} className="overflow-hidden">
-                      <div className="aspect-video overflow-hidden">
-                        <img 
-                          src={getActionImage(action.categorie)} 
-                          alt={action.titre}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <CardContent className="p-6">
-                        <h3 className="font-semibold mb-2">{action.titre}</h3>
-                        <p className="text-sm text-muted-foreground">{action.description}</p>
-                      </CardContent>
-                    </Card>
+                    <Link key={action.id} to={`/nos-actions/${action.id}`}>
+                      <Card className="overflow-hidden hover:shadow-lg transition-all h-full">
+                        <div className="aspect-video overflow-hidden">
+                          {action.media_url ? (
+                            <video 
+                              src={action.media_url} 
+                              className="w-full h-full object-cover"
+                              muted
+                            />
+                          ) : (
+                            <img 
+                              src={getActionImage(action.categorie)} 
+                              alt={action.titre}
+                              className="w-full h-full object-cover"
+                            />
+                          )}
+                        </div>
+                        <CardContent className="p-6">
+                          <h3 className="font-semibold mb-2">{action.titre}</h3>
+                          <p className="text-sm text-muted-foreground line-clamp-2">{action.description}</p>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   ))}
                 </div>
               </TabsContent>
@@ -154,19 +181,21 @@ const NosActions = () => {
               <TabsContent value="photos">
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {actions.filter(a => a.media_type === "image").map((action) => (
-                    <Card key={action.id} className="overflow-hidden">
-                      <div className="aspect-video overflow-hidden">
-                        <img 
-                          src={getActionImage(action.categorie)} 
-                          alt={action.titre}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <CardContent className="p-6">
-                        <h3 className="font-semibold mb-2">{action.titre}</h3>
-                        <p className="text-sm text-muted-foreground">{action.description}</p>
-                      </CardContent>
-                    </Card>
+                    <Link key={action.id} to={`/nos-actions/${action.id}`}>
+                      <Card className="overflow-hidden hover:shadow-lg transition-all h-full">
+                        <div className="aspect-video overflow-hidden">
+                          <img 
+                            src={action.media_url || getActionImage(action.categorie)} 
+                            alt={action.titre}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <CardContent className="p-6">
+                          <h3 className="font-semibold mb-2">{action.titre}</h3>
+                          <p className="text-sm text-muted-foreground line-clamp-2">{action.description}</p>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   ))}
                 </div>
               </TabsContent>

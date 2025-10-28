@@ -77,54 +77,57 @@ const Actualites = () => {
           <div className="container mx-auto max-w-4xl">
             <h2 className="text-3xl font-bold mb-8">Actualités Récentes</h2>
             
-            <div className="space-y-6 mb-12">
+            <div className="space-y-8 mb-12">
               {actualites.map((actualite, index) => (
-                <Card key={actualite.id} className="overflow-hidden">
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div className="md:col-span-1">
+                <Card key={actualite.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="grid md:grid-cols-5 gap-0">
+                    <div className="md:col-span-2">
                       <img 
-                        src={getImage(index)} 
+                        src={actualite.image_url || getImage(index)} 
                         alt={actualite.titre}
-                        className="w-full h-48 md:h-full object-cover"
+                        className="w-full h-64 md:h-full object-cover"
                       />
                     </div>
-                    <CardContent className="md:col-span-2 p-6">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                        <Calendar className="h-4 w-4" />
-                        <span>{actualite.date}</span>
+                    <CardContent className="md:col-span-3 p-8">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                        <Calendar className="h-4 w-4 text-primary" />
+                        <span className="font-medium">{actualite.date}</span>
                       </div>
-                      <h3 className="text-xl font-semibold mb-3">{actualite.titre}</h3>
-                      <p className="text-muted-foreground">{actualite.description}</p>
+                      <h3 className="text-2xl font-bold mb-4">{actualite.titre}</h3>
+                      <p className="text-muted-foreground leading-relaxed text-base">{actualite.description}</p>
                     </CardContent>
                   </div>
                 </Card>
               ))}
             </div>
 
-            <Card className="bg-primary text-white">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-4">Restez informé</h3>
-                <p className="mb-6 opacity-90">
-                  Inscrivez-vous à notre newsletter pour recevoir nos dernières actualités et événements
-                </p>
-                <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
-                  <Input
-                    type="email"
-                    placeholder="Votre email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="bg-white text-foreground"
-                  />
-                  <Button 
-                    type="submit" 
-                    variant="secondary"
-                    disabled={loading}
-                    className="bg-white text-primary hover:bg-white/90"
-                  >
-                    {loading ? "..." : "S'inscrire"}
-                  </Button>
-                </form>
+            <Card className="bg-primary text-primary-foreground border-none shadow-lg">
+              <CardContent className="p-10">
+                <div className="max-w-xl mx-auto text-center">
+                  <h3 className="text-3xl font-bold mb-4">Restez informé</h3>
+                  <p className="mb-8 text-lg">
+                    Inscrivez-vous à notre newsletter pour recevoir nos dernières actualités et événements
+                  </p>
+                  <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3">
+                    <Input
+                      type="email"
+                      placeholder="Votre adresse email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="bg-white text-foreground border-none flex-1"
+                    />
+                    <Button 
+                      type="submit" 
+                      variant="secondary"
+                      disabled={loading}
+                      size="lg"
+                      className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                    >
+                      {loading ? "Inscription..." : "S'inscrire"}
+                    </Button>
+                  </form>
+                </div>
               </CardContent>
             </Card>
           </div>

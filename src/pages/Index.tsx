@@ -1,12 +1,23 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Users, TreePine, BookOpen, Video, Image as ImageIcon, MessageSquare } from "lucide-react";
+import { Heart, Users, TreePine, BookOpen } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import heroImage from "@/assets/hero-solidarity.jpg";
+import treeImage from "@/assets/tree-planting.jpg";
+import educationImage from "@/assets/education-aid.jpg";
+import healthImage from "@/assets/health-campaign.jpg";
 
 const Index = () => {
   const { data: recentActions = [] } = useQuery({
@@ -35,36 +46,59 @@ const Index = () => {
       <Header />
       
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative py-20 md:py-32 px-4 overflow-hidden">
-          <div className="absolute inset-0">
-            <img 
-              src={heroImage} 
-              alt="Union Solidaire - Solidarité en action" 
-              className="w-full h-full object-cover brightness-50"
-            />
-          </div>
-          <div className="container mx-auto text-center space-y-8 relative z-10">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
-              Unis pour aider,<br />
-              <span className="text-primary">solidaire pour changer</span>
-            </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Rejoignez-nous dans notre mission de solidarité et de changement positif à Gandiaye et au-delà.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 w-full sm:w-auto">
-                  Rejoindre l'association
-                </Button>
-              </Link>
-              <Link to="/contribuer">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                  Faire un don
-                </Button>
-              </Link>
-            </div>
-          </div>
+        {/* Hero Carousel Section */}
+        <section className="relative overflow-hidden">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 5000,
+              }),
+            ]}
+            className="w-full"
+          >
+            <CarouselContent>
+              {[heroImage, treeImage, educationImage, healthImage].map((image, index) => (
+                <CarouselItem key={index}>
+                  <div className="relative h-[500px] md:h-[600px]">
+                    <div className="absolute inset-0">
+                      <img 
+                        src={image} 
+                        alt={`Union Solidaire action ${index + 1}`}
+                        className="w-full h-full object-cover brightness-50"
+                      />
+                    </div>
+                    <div className="container mx-auto text-center space-y-8 relative z-10 h-full flex flex-col justify-center px-4">
+                      <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
+                        Unis pour aider,<br />
+                        <span className="text-primary">solidaire pour changer</span>
+                      </h1>
+                      <p className="text-xl text-white/90 max-w-2xl mx-auto">
+                        Rejoignez-nous dans notre mission de solidarité et de changement positif à Gandiaye et au-delà.
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Link to="/contact">
+                          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
+                            Rejoindre l'association
+                          </Button>
+                        </Link>
+                        <Link to="/contribuer">
+                          <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                            Faire un don
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
         </section>
 
         {/* Stats Section */}
@@ -96,17 +130,34 @@ const Index = () => {
 
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               {recentActions.map((action) => (
-                <Card key={action.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="aspect-video bg-muted flex items-center justify-center">
-                    {action.media_type === "video" && <Video className="h-16 w-16 text-primary" />}
-                    {action.media_type === "image" && <ImageIcon className="h-16 w-16 text-secondary" />}
-                    {action.media_type === "testimonial" && <MessageSquare className="h-16 w-16 text-accent" />}
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold mb-2">{action.titre}</h3>
-                    <p className="text-sm text-muted-foreground">{action.description}</p>
-                  </CardContent>
-                </Card>
+                <Link key={action.id} to={`/nos-actions/${action.id}`}>
+                  <Card className="overflow-hidden hover:shadow-lg transition-all h-full">
+                    <div className="aspect-video overflow-hidden">
+                      {action.media_type === "video" && action.media_url ? (
+                        <video 
+                          src={action.media_url} 
+                          className="w-full h-full object-cover"
+                          muted
+                        />
+                      ) : action.media_url ? (
+                        <img 
+                          src={action.media_url} 
+                          alt={action.titre}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-muted flex items-center justify-center">
+                          <span className="text-4xl">{action.categorie === "Environnement" ? "🌳" : action.categorie === "Éducation" ? "📚" : "❤️"}</span>
+                        </div>
+                      )}
+                    </div>
+                    <CardContent className="p-6">
+                      <span className="text-xs font-medium text-primary">{action.categorie}</span>
+                      <h3 className="font-semibold mb-2 mt-1">{action.titre}</h3>
+                      <p className="text-sm text-muted-foreground line-clamp-2">{action.description}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
 

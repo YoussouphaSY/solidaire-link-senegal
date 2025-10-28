@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, Target, Eye, Heart } from "lucide-react";
+import { Users, Target, Eye, Heart, BookOpen, TreePine } from "lucide-react";
 
 const APropos = () => {
   const bureau = [
@@ -78,29 +78,38 @@ const APropos = () => {
 
         {/* Objectifs */}
         <section className="py-16 px-4">
-          <div className="container mx-auto max-w-4xl">
-            <h2 className="text-3xl font-bold mb-6">Nos Objectifs</h2>
-            <div className="space-y-4">
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Promouvoir l'éducation</h3>
+          <div className="container mx-auto max-w-5xl">
+            <h2 className="text-3xl font-bold text-center mb-12">Nos Objectifs</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="border-2 hover:border-primary transition-colors">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                    <BookOpen className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="font-bold text-xl mb-3">Promouvoir l'éducation</h3>
                   <p className="text-muted-foreground">
                     Soutenir les élèves dans leur parcours scolaire en fournissant du matériel 
                     et un accompagnement adapté.
                   </p>
                 </CardContent>
               </Card>
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Protéger l'environnement</h3>
+              <Card className="border-2 hover:border-secondary transition-colors">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-secondary/10 rounded-full flex items-center justify-center">
+                    <TreePine className="h-8 w-8 text-secondary" />
+                  </div>
+                  <h3 className="font-bold text-xl mb-3">Protéger l'environnement</h3>
                   <p className="text-muted-foreground">
                     Mener des actions de reboisement et de sensibilisation à la protection de notre écosystème.
                   </p>
                 </CardContent>
               </Card>
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Renforcer la solidarité</h3>
+              <Card className="border-2 hover:border-primary transition-colors">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Heart className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="font-bold text-xl mb-3">Renforcer la solidarité</h3>
                   <p className="text-muted-foreground">
                     Créer des liens forts au sein de la communauté et apporter aide aux plus démunis.
                   </p>
@@ -137,8 +146,8 @@ const APropos = () => {
               en créant des antennes dans plusieurs villes du Sénégal. Notre objectif est 
               de devenir un acteur majeur du développement solidaire et communautaire au Sénégal.
             </p>
-            <div className="bg-gradient-to-br from-primary to-secondary text-white p-8 rounded-lg">
-              <p className="text-xl font-semibold">
+            <div className="bg-primary text-primary-foreground p-10 rounded-lg shadow-lg">
+              <p className="text-2xl font-bold">
                 "Ensemble, construisons un Sénégal plus solidaire et prospère"
               </p>
             </div>
