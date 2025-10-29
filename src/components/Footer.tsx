@@ -11,10 +11,10 @@ const TikTokIcon = () => (
 const Footer = () => {
   return (
     <footer className="border-t bg-muted/50">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
           {/* About */}
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             <div className="flex items-center space-x-2">
               <img src={logo} alt="Union Solidaire" className="h-10 w-10 rounded-full object-cover" />
               <span className="text-lg font-bold">Union Solidaire</span>
@@ -26,7 +26,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">Liens rapides</h3>
+            <h3 className="font-semibold mb-3 md:mb-4">Liens rapides</h3>
             <ul className="space-y-2 text-sm">
               <li><Link to="/a-propos" className="text-muted-foreground hover:text-primary">À Propos</Link></li>
               <li><Link to="/nos-actions" className="text-muted-foreground hover:text-primary">Nos Actions</Link></li>
@@ -35,26 +35,29 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="font-semibold mb-4">Contact</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" />
-                <span>Gandiaye, Sénégal</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                <a href="tel:+221771236791" className="hover:text-primary">+221 77 123 67 91</a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
-                <span>contact@unionsolidaire.sn</span>
-              </li>
-            </ul>
-            <div className="mt-4 pt-4 border-t">
+          {/* Contact & Donation combined on mobile */}
+          <div className="space-y-4">
+            <div>
+              <h3 className="font-semibold mb-3 md:mb-4">Contact</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4 flex-shrink-0" />
+                  <span>Gandiaye, Sénégal</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Phone className="h-4 w-4 flex-shrink-0" />
+                  <a href="tel:+221771236791" className="hover:text-primary">+221 77 123 67 91</a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="h-4 w-4 flex-shrink-0" />
+                  <span className="break-all">contact@unionsolidaire.sn</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="pt-4 border-t">
               <h4 className="font-semibold mb-2 text-sm">Faire un don</h4>
-              <ul className="space-y-2 text-xs text-muted-foreground">
+              <ul className="space-y-1 text-xs text-muted-foreground">
                 <li>Wave / Orange Money</li>
                 <li className="font-medium text-primary">77 123 67 91</li>
                 <li className="mt-2">
@@ -73,8 +76,8 @@ const Footer = () => {
 
           {/* Social */}
           <div>
-            <h3 className="font-semibold mb-4">Suivez-nous</h3>
-            <div className="flex gap-4">
+            <h3 className="font-semibold mb-3 md:mb-4">Suivez-nous</h3>
+            <div className="flex gap-4 flex-wrap">
               <a href="https://facebook.com/unionsolidaire" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Facebook">
                 <Facebook className="h-5 w-5" />
               </a>
