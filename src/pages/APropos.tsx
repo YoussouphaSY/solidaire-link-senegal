@@ -5,12 +5,12 @@ import { Users, Target, Eye, Heart, BookOpen, TreePine } from "lucide-react";
 
 const APropos = () => {
   const bureau = [
-    { nom: "Prénom Nom", fonction: "Président", photo: "👤" },
-    { nom: "Prénom Nom", fonction: "Vice-Président", photo: "👤" },
-    { nom: "Prénom Nom", fonction: "Secrétaire Général", photo: "👤" },
-    { nom: "Prénom Nom", fonction: "Trésorier", photo: "👤" },
-    { nom: "Prénom Nom", fonction: "Coordinateur", photo: "👤" },
-    { nom: "Prénom Nom", fonction: "Chargé de Communication", photo: "👤" },
+    { nom: "Abdoulaye Sy", fonction: "Président", photo: "👤" },
+    { nom: "Bigué Ndiaye", fonction: "Vice-Présidente", photo: "👤" },
+    { nom: "Ndèye Khady Diouf", fonction: "Secrétaire Générale", photo: "👤" },
+    { nom: "Aladji Sarr", fonction: "Coordinateur", photo: "👤" },
+    { nom: "Mariama Sy", fonction: "Chargée de la Trésorerie", photo: "👤" },
+    { nom: "Latsouck Faye", fonction: "Chargée de la Trésorerie", photo: "👤" },
   ];
 
   const valeurs = [
@@ -41,18 +41,22 @@ const APropos = () => {
             <h2 className="text-3xl font-bold mb-6">Notre Histoire</h2>
             <div className="prose max-w-none text-muted-foreground space-y-4">
               <p>
-                Union Solidaire est née de la volonté d'un groupe de jeunes citoyens de Gandiaye, 
-                désireux de contribuer au développement de leur communauté. Fondée en [année], 
-                notre association s'est donnée pour mission de promouvoir la solidarité et l'entraide.
+                Le Mouvement Union Solidaire est un mouvement régi par la loi n°68-08 du 26 mars 1968. 
+                Fondé entre les adhérents aux statuts, notre association s'est donnée pour mission de 
+                promouvoir la solidarité, l'entraide sociale, et de mener des actions sociales.
               </p>
               <p>
-                Au fil des années, nous avons su mobiliser de plus en plus de membres et de sympathisants, 
-                nous permettant de mener des actions concrètes dans divers domaines : éducation, 
-                environnement, santé, et aide sociale.
+                Notre siège social se trouve à Gandiaye, mais des antennes peuvent être créées dans 
+                d'autres régions du Sénégal. Au fil des années, nous avons su mobiliser de plus en plus 
+                de membres et de sympathisants, nous permettant de mener des actions concrètes dans 
+                divers domaines : distributions de dons, campagnes de reboisements, et soutiens 
+                pédagogiques aux enfants en difficultés.
               </p>
               <p>
-                Aujourd'hui, Union Solidaire compte plus de [nombre] membres actifs et a touché 
-                la vie de milliers de personnes à travers ses différentes initiatives.
+                L'an deux mille vingt-cinq, le deux janvier, s'est tenue à Dakar (Parcelles Assainies) 
+                l'Assemblée Générale constitutive du Mouvement dénommé Union Solidaire. Les membres, 
+                dûment convoqués, étaient présents à cette assemblée constitutive qui a permis de 
+                mettre en place le bureau exécutif actuel.
               </p>
             </div>
           </div>

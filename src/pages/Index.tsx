@@ -275,6 +275,47 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Programme Section */}
+        <section className="py-16 px-4 bg-muted">
+          <div className="container mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Programme 2025</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Nos actions planifiées pour cette année
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <Card className="border-2 hover:border-primary transition-colors">
+                <CardContent className="p-6">
+                  <div className="text-sm font-semibold text-primary mb-2">29 Mars 2025</div>
+                  <h3 className="font-bold text-lg mb-3">Dons de Korité - Familles</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Distribution de kits de korité pour les familles diminuées
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="border-2 hover:border-primary transition-colors">
+                <CardContent className="p-6">
+                  <div className="text-sm font-semibold text-primary mb-2">29 Mars 2025</div>
+                  <h3 className="font-bold text-lg mb-3">Dons de Korité - Talibés</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Distribution de vêtements de korité pour 18 talibés
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="border-2 hover:border-primary transition-colors">
+                <CardContent className="p-6">
+                  <div className="text-sm font-semibold text-primary mb-2">11 Octobre 2025</div>
+                  <h3 className="font-bold text-lg mb-3">Kits Scolaires</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Distribution de 65 sacs et fournitures scolaires
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-16 px-4 bg-primary text-white">
           <div className="container mx-auto text-center space-y-6">

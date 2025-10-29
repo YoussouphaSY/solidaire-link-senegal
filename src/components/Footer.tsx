@@ -45,29 +45,46 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
-                <span>+221 XX XXX XX XX</span>
+                <a href="tel:+221771236791" className="hover:text-primary">+221 77 123 67 91</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
                 <span>contact@unionsolidaire.sn</span>
               </li>
             </ul>
+            <div className="mt-4 pt-4 border-t">
+              <h4 className="font-semibold mb-2 text-sm">Faire un don</h4>
+              <ul className="space-y-2 text-xs text-muted-foreground">
+                <li>Wave / Orange Money</li>
+                <li className="font-medium text-primary">77 123 67 91</li>
+                <li className="mt-2">
+                  <a 
+                    href="https://koparexpress.com/apps/collectes/n3hkz8jth9" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    Kopar Express
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Social */}
           <div>
             <h3 className="font-semibold mb-4">Suivez-nous</h3>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Facebook">
+              <a href="https://facebook.com/unionsolidaire" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Facebook">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Twitter">
-                <Twitter className="h-5 w-5" />
+              <a href="https://wa.me/221771236791" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="WhatsApp">
+                <Phone className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram">
+              <a href="https://instagram.com/unionsolidaire" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="TikTok">
+              <a href="https://tiktok.com/@unionsolidaire" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="TikTok">
                 <TikTokIcon />
               </a>
             </div>
