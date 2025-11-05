@@ -15,6 +15,10 @@ import koriteTalibesImg2 from "@/assets/korite-talibes-2.jpg";
 import kitsScolairesImg1 from "@/assets/kits-scolaires-1.jpg";
 import kitsScolairesImg2 from "@/assets/kits-scolaires-2.jpg";
 import kitsScolairesImg3 from "@/assets/kits-scolaires-3.jpg";
+import videoKorite1 from "@/assets/video-korite-1.mp4";
+import videoKorite2 from "@/assets/video-korite-2.mp4";
+import videoKorite3 from "@/assets/video-korite-3.mp4";
+import videoKorite4 from "@/assets/video-korite-4.mp4";
 
 const ActionDetails = () => {
   const { id } = useParams();
@@ -84,7 +88,7 @@ const ActionDetails = () => {
       
       <main className="flex-1">
         {/* Hero */}
-        <section className="relative py-20 px-4">
+        <section className="relative py-12 md:py-20 px-4">
           <div className="absolute inset-0">
             <img 
               src={getActionImage(action)} 
@@ -93,23 +97,23 @@ const ActionDetails = () => {
             />
           </div>
           <div className="container mx-auto relative z-10">
-            <Link to="/nos-actions" className="inline-flex items-center gap-2 text-white mb-6 hover:text-primary transition-colors">
-              <ArrowLeft className="h-5 w-5" />
+            <Link to="/nos-actions" className="inline-flex items-center gap-2 text-white mb-4 md:mb-6 hover:text-primary transition-colors text-sm md:text-base">
+              <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
               <span>Retour aux actions</span>
             </Link>
             <div className="max-w-3xl">
-              <span className="inline-block px-3 py-1 bg-primary text-primary-foreground text-sm font-medium rounded-full mb-4">
+              <span className="inline-block px-3 py-1 bg-primary text-primary-foreground text-xs md:text-sm font-medium rounded-full mb-3 md:mb-4">
                 {action.categorie}
               </span>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{action.titre}</h1>
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{action.titre}</h1>
             </div>
           </div>
         </section>
 
         {/* Content */}
-        <section className="py-16 px-4">
+        <section className="py-8 md:py-16 px-4">
           <div className="container mx-auto max-w-4xl">
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
               <Card>
                 <CardContent className="pt-6 flex items-center gap-3">
                   <Calendar className="h-5 w-5 text-primary" />
@@ -139,15 +143,15 @@ const ActionDetails = () => {
               </Card>
             </div>
 
-            <div className="prose max-w-none mb-12">
-              <h2 className="text-2xl font-bold mb-4">Description</h2>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+            <div className="prose max-w-none mb-8 md:mb-12">
+              <h2 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Description</h2>
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
                 {action.description}
               </p>
             </div>
 
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6">Galerie Photos</h2>
+            <div className="mb-8 md:mb-12">
+              <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Galerie Photos & Vidéos</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="rounded-lg overflow-hidden">
                   <img 
@@ -183,16 +187,56 @@ const ActionDetails = () => {
                     </div>
                   </>
                 )}
+                {action.titre.toLowerCase().includes('korité') && (
+                  <>
+                    <div className="rounded-lg overflow-hidden">
+                      <video 
+                        controls
+                        className="w-full aspect-video object-cover"
+                      >
+                        <source src={videoKorite1} type="video/mp4" />
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                      </video>
+                    </div>
+                    <div className="rounded-lg overflow-hidden">
+                      <video 
+                        controls
+                        className="w-full aspect-video object-cover"
+                      >
+                        <source src={videoKorite2} type="video/mp4" />
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                      </video>
+                    </div>
+                    <div className="rounded-lg overflow-hidden">
+                      <video 
+                        controls
+                        className="w-full aspect-video object-cover"
+                      >
+                        <source src={videoKorite3} type="video/mp4" />
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                      </video>
+                    </div>
+                    <div className="rounded-lg overflow-hidden">
+                      <video 
+                        controls
+                        className="w-full aspect-video object-cover"
+                      >
+                        <source src={videoKorite4} type="video/mp4" />
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                      </video>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
-            <div className="bg-muted p-8 rounded-lg text-center">
-              <h3 className="text-2xl font-bold mb-4">Soutenez nos actions</h3>
-              <p className="text-muted-foreground mb-6">
+            <div className="bg-muted p-6 md:p-8 rounded-lg text-center">
+              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Soutenez nos actions</h3>
+              <p className="text-muted-foreground mb-4 md:mb-6 text-sm md:text-base">
                 Votre contribution nous aide à mener davantage d'actions comme celle-ci
               </p>
               <Link to="/contribuer">
-                <Button size="lg" className="bg-primary hover:bg-primary/90">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 w-full sm:w-auto">
                   Faire un don
                 </Button>
               </Link>
