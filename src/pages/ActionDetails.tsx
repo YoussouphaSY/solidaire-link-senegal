@@ -9,6 +9,12 @@ import { supabase } from "@/integrations/supabase/client";
 import treeImage from "@/assets/tree-planting.jpg";
 import educationImage from "@/assets/education-aid.jpg";
 import healthImage from "@/assets/health-campaign.jpg";
+import koriteFamillesImg from "@/assets/korite-familles.jpg";
+import koriteTalibesImg1 from "@/assets/korite-talibes-1.jpg";
+import koriteTalibesImg2 from "@/assets/korite-talibes-2.jpg";
+import kitsScolairesImg1 from "@/assets/kits-scolaires-1.jpg";
+import kitsScolairesImg2 from "@/assets/kits-scolaires-2.jpg";
+import kitsScolairesImg3 from "@/assets/kits-scolaires-3.jpg";
 
 const ActionDetails = () => {
   const { id } = useParams();
@@ -27,10 +33,16 @@ const ActionDetails = () => {
     }
   });
 
-  const getActionImage = (categorie: string) => {
-    if (categorie === "Environnement") return treeImage;
-    if (categorie === "Éducation") return educationImage;
-    if (categorie === "Santé") return healthImage;
+  const getActionImage = (action: any) => {
+    const titre = action.titre.toLowerCase();
+    if (titre.includes('kits de korité') && titre.includes('familles')) return koriteFamillesImg;
+    if (titre.includes('vêtements') && titre.includes('talibés')) return koriteTalibesImg1;
+    if (titre.includes('kits scolaires')) return kitsScolairesImg1;
+    
+    // Fallback selon catégorie
+    if (action.categorie === "Environnement") return treeImage;
+    if (action.categorie === "Éducation") return educationImage;
+    if (action.categorie === "Santé") return healthImage;
     return treeImage;
   };
 
@@ -74,21 +86,11 @@ const ActionDetails = () => {
         {/* Hero */}
         <section className="relative py-20 px-4">
           <div className="absolute inset-0">
-            {action.media_type === "video" && action.media_url ? (
-              <video 
-                src={action.media_url} 
-                className="w-full h-full object-cover brightness-50"
-                autoPlay
-                loop
-                muted
-              />
-            ) : (
-              <img 
-                src={action.media_url || getActionImage(action.categorie)} 
-                alt={action.titre}
-                className="w-full h-full object-cover brightness-50"
-              />
-            )}
+            <img 
+              src={getActionImage(action)} 
+              alt={action.titre}
+              className="w-full h-full object-cover brightness-50"
+            />
           </div>
           <div className="container mx-auto relative z-10">
             <Link to="/nos-actions" className="inline-flex items-center gap-2 text-white mb-6 hover:text-primary transition-colors">
@@ -144,26 +146,45 @@ const ActionDetails = () => {
               </p>
             </div>
 
-            {action.media_url && (
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6">Media</h2>
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold mb-6">Galerie Photos</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="rounded-lg overflow-hidden">
-                  {action.media_type === "video" ? (
-                    <video 
-                      src={action.media_url} 
-                      controls
-                      className="w-full aspect-video"
-                    />
-                  ) : (
+                  <img 
+                    src={getActionImage(action)} 
+                    alt={action.titre}
+                    className="w-full aspect-video object-cover"
+                  />
+                </div>
+                {action.titre.toLowerCase().includes('talibés') && (
+                  <div className="rounded-lg overflow-hidden">
                     <img 
-                      src={action.media_url} 
-                      alt={action.titre}
+                      src={koriteTalibesImg2} 
+                      alt={`${action.titre} - Photo 2`}
                       className="w-full aspect-video object-cover"
                     />
-                  )}
-                </div>
+                  </div>
+                )}
+                {action.titre.toLowerCase().includes('kits scolaires') && (
+                  <>
+                    <div className="rounded-lg overflow-hidden">
+                      <img 
+                        src={kitsScolairesImg2} 
+                        alt={`${action.titre} - Photo 2`}
+                        className="w-full aspect-video object-cover"
+                      />
+                    </div>
+                    <div className="rounded-lg overflow-hidden">
+                      <img 
+                        src={kitsScolairesImg3} 
+                        alt={`${action.titre} - Photo 3`}
+                        className="w-full aspect-video object-cover"
+                      />
+                    </div>
+                  </>
+                )}
               </div>
-            )}
+            </div>
 
             <div className="bg-muted p-8 rounded-lg text-center">
               <h3 className="text-2xl font-bold mb-4">Soutenez nos actions</h3>

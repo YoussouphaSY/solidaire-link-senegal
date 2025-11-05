@@ -18,6 +18,12 @@ import heroImage from "@/assets/hero-solidarity.jpg";
 import treeImage from "@/assets/tree-planting.jpg";
 import educationImage from "@/assets/education-aid.jpg";
 import healthImage from "@/assets/health-campaign.jpg";
+import koriteFamillesImg from "@/assets/korite-familles.jpg";
+import koriteTalibesImg1 from "@/assets/korite-talibes-1.jpg";
+import koriteTalibesImg2 from "@/assets/korite-talibes-2.jpg";
+import kitsScolairesImg1 from "@/assets/kits-scolaires-1.jpg";
+import kitsScolairesImg2 from "@/assets/kits-scolaires-2.jpg";
+import kitsScolairesImg3 from "@/assets/kits-scolaires-3.jpg";
 
 const Index = () => {
   const { data: recentActions = [] } = useQuery({
@@ -33,6 +39,14 @@ const Index = () => {
       return data;
     }
   });
+
+  const getActionImage = (action: any) => {
+    const titre = action.titre.toLowerCase();
+    if (titre.includes('kits de korité') && titre.includes('familles')) return koriteFamillesImg;
+    if (titre.includes('vêtements') && titre.includes('talibés')) return koriteTalibesImg1;
+    if (titre.includes('kits scolaires')) return kitsScolairesImg1;
+    return educationImage;
+  };
 
   const stats = [
     { label: "Actions menées", value: "50+", icon: Heart },
@@ -241,19 +255,11 @@ const Index = () => {
                 <Link key={action.id} to={`/nos-actions/${action.id}`}>
                   <Card className="overflow-hidden hover:shadow-lg transition-all h-full group">
                     <div className="aspect-video overflow-hidden">
-                      {action.media_type === "video" && action.media_url ? (
-                        <video 
-                          src={action.media_url} 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          muted
-                        />
-                      ) : action.media_url ? (
-                        <img 
-                          src={action.media_url} 
-                          alt={action.titre}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      ) : null}
+                      <img 
+                        src={getActionImage(action)} 
+                        alt={action.titre}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
                     <CardContent className="p-6">
                       <span className="text-xs font-medium text-primary">{action.categorie}</span>

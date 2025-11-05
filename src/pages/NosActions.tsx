@@ -9,6 +9,12 @@ import { supabase } from "@/integrations/supabase/client";
 import treeImage from "@/assets/tree-planting.jpg";
 import educationImage from "@/assets/education-aid.jpg";
 import healthImage from "@/assets/health-campaign.jpg";
+import koriteFamillesImg from "@/assets/korite-familles.jpg";
+import koriteTalibesImg1 from "@/assets/korite-talibes-1.jpg";
+import koriteTalibesImg2 from "@/assets/korite-talibes-2.jpg";
+import kitsScolairesImg1 from "@/assets/kits-scolaires-1.jpg";
+import kitsScolairesImg2 from "@/assets/kits-scolaires-2.jpg";
+import kitsScolairesImg3 from "@/assets/kits-scolaires-3.jpg";
 
 const NosActions = () => {
   const { data: actions = [] } = useQuery({
@@ -24,10 +30,16 @@ const NosActions = () => {
     }
   });
 
-  const getActionImage = (categorie: string) => {
-    if (categorie === "Environnement") return treeImage;
-    if (categorie === "Éducation") return educationImage;
-    if (categorie === "Santé") return healthImage;
+  const getActionImage = (action: any) => {
+    const titre = action.titre.toLowerCase();
+    if (titre.includes('kits de korité') && titre.includes('familles')) return koriteFamillesImg;
+    if (titre.includes('vêtements') && titre.includes('talibés')) return koriteTalibesImg1;
+    if (titre.includes('kits scolaires')) return kitsScolairesImg1;
+    
+    // Fallback selon catégorie
+    if (action.categorie === "Environnement") return treeImage;
+    if (action.categorie === "Éducation") return educationImage;
+    if (action.categorie === "Santé") return healthImage;
     return treeImage;
   };
 
@@ -111,25 +123,11 @@ const NosActions = () => {
                     <Link key={action.id} to={`/nos-actions/${action.id}`}>
                       <Card className="overflow-hidden hover:shadow-lg transition-all h-full">
                         <div className="aspect-video overflow-hidden">
-                          {action.media_type === "video" && action.media_url ? (
-                            <video 
-                              src={action.media_url} 
-                              className="w-full h-full object-cover"
-                              muted
-                            />
-                          ) : action.media_url ? (
-                            <img 
-                              src={action.media_url} 
-                              alt={action.titre}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <img 
-                              src={getActionImage(action.categorie)} 
-                              alt={action.titre}
-                              className="w-full h-full object-cover"
-                            />
-                          )}
+                          <img 
+                            src={getActionImage(action)} 
+                            alt={action.titre}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         <CardContent className="p-6">
                           <div className="flex items-center gap-2 mb-2">
@@ -154,19 +152,11 @@ const NosActions = () => {
                     <Link key={action.id} to={`/nos-actions/${action.id}`}>
                       <Card className="overflow-hidden hover:shadow-lg transition-all h-full">
                         <div className="aspect-video overflow-hidden">
-                          {action.media_url ? (
-                            <video 
-                              src={action.media_url} 
-                              className="w-full h-full object-cover"
-                              muted
-                            />
-                          ) : (
-                            <img 
-                              src={getActionImage(action.categorie)} 
-                              alt={action.titre}
-                              className="w-full h-full object-cover"
-                            />
-                          )}
+                          <img 
+                            src={getActionImage(action)} 
+                            alt={action.titre}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         <CardContent className="p-6">
                           <h3 className="font-semibold mb-2">{action.titre}</h3>
@@ -185,7 +175,7 @@ const NosActions = () => {
                       <Card className="overflow-hidden hover:shadow-lg transition-all h-full">
                         <div className="aspect-video overflow-hidden">
                           <img 
-                            src={action.media_url || getActionImage(action.categorie)} 
+                            src={getActionImage(action)} 
                             alt={action.titre}
                             className="w-full h-full object-cover"
                           />
