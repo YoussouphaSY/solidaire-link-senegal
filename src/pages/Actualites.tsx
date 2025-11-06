@@ -77,39 +77,35 @@ const Actualites = () => {
         </section>
 
         <section className="py-12 px-4">
-          <div className="container mx-auto max-w-5xl">
-            <h2 className="text-3xl font-bold mb-8">Actualités Récentes</h2>
+          <div className="container mx-auto max-w-7xl">
+            <h2 className="text-3xl font-bold mb-8 text-center">Actualités Récentes</h2>
             
-            <div className="space-y-6 mb-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {actualites.map((actualite, index) => (
                 <Link key={actualite.id} to={`/actualites/${actualite.id}`}>
-                  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                    <div className="grid md:grid-cols-2 gap-0">
-                      <div className="overflow-hidden">
-                        <img 
-                          src={actualite.image_url || getImage(index)} 
-                          alt={actualite.titre}
-                          className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <CardContent className="p-6 flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                            <Calendar className="h-4 w-4 text-primary" />
-                            <span>{actualite.date}</span>
-                          </div>
-                          <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                            {actualite.titre}
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed line-clamp-3">
-                            {actualite.description}
-                          </p>
-                        </div>
-                        <Button variant="link" className="p-0 mt-4 text-primary self-start">
-                          Lire la suite →
-                        </Button>
-                      </CardContent>
+                  <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+                    <div className="overflow-hidden relative aspect-video">
+                      <img 
+                        src={actualite.image_url || getImage(index)} 
+                        alt={actualite.titre}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
                     </div>
+                    <CardContent className="p-6 flex flex-col flex-1">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                        <Calendar className="h-4 w-4 text-primary" />
+                        <span>{actualite.date}</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                        {actualite.titre}
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed line-clamp-3 flex-1">
+                        {actualite.description}
+                      </p>
+                      <Button variant="link" className="p-0 mt-4 text-primary self-start group-hover:translate-x-1 transition-transform">
+                        Lire la suite →
+                      </Button>
+                    </CardContent>
                   </Card>
                 </Link>
               ))}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Calendar, MapPin, Users } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import ImageLightbox from "@/components/ImageLightbox";
 import treeImage from "@/assets/tree-planting.jpg";
 import educationImage from "@/assets/education-aid.jpg";
 import healthImage from "@/assets/health-campaign.jpg";
@@ -22,6 +24,9 @@ import videoKorite4 from "@/assets/video-korite-4.mp4";
 
 const ActionDetails = () => {
   const { id } = useParams();
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
 
   const { data: action, isLoading } = useQuery({
     queryKey: ['action', id],
@@ -152,41 +157,101 @@ const ActionDetails = () => {
 
             <div className="mb-8 md:mb-12">
               <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Galerie Photos & Vidéos</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="rounded-lg overflow-hidden">
-                  <img 
-                    src={getActionImage(action)} 
-                    alt={action.titre}
-                    className="w-full aspect-video object-cover"
-                  />
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {action.titre.toLowerCase().includes('talibés') && (
-                  <div className="rounded-lg overflow-hidden">
-                    <img 
-                      src={koriteTalibesImg2} 
-                      alt={`${action.titre} - Photo 2`}
-                      className="w-full aspect-video object-cover"
-                    />
-                  </div>
-                )}
-                {action.titre.toLowerCase().includes('kits scolaires') && (
                   <>
-                    <div className="rounded-lg overflow-hidden">
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([koriteTalibesImg1, koriteTalibesImg2, koriteFamillesImg]);
+                        setCurrentImageIndex(0);
+                        setLightboxOpen(true);
+                      }}
+                    >
                       <img 
-                        src={kitsScolairesImg2} 
-                        alt={`${action.titre} - Photo 2`}
-                        className="w-full aspect-video object-cover"
+                        src={koriteTalibesImg1} 
+                        alt="Korité Talibés 1"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
-                    <div className="rounded-lg overflow-hidden">
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([koriteTalibesImg1, koriteTalibesImg2, koriteFamillesImg]);
+                        setCurrentImageIndex(1);
+                        setLightboxOpen(true);
+                      }}
+                    >
                       <img 
-                        src={kitsScolairesImg3} 
-                        alt={`${action.titre} - Photo 3`}
-                        className="w-full aspect-video object-cover"
+                        src={koriteTalibesImg2} 
+                        alt="Korité Talibés 2"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([koriteTalibesImg1, koriteTalibesImg2, koriteFamillesImg]);
+                        setCurrentImageIndex(2);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={koriteFamillesImg} 
+                        alt="Korité Familles"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
                   </>
                 )}
+                
+                {action.titre.toLowerCase().includes('kits scolaires') && (
+                  <>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([kitsScolairesImg1, kitsScolairesImg2, kitsScolairesImg3]);
+                        setCurrentImageIndex(0);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={kitsScolairesImg1} 
+                        alt="Distribution Kits Scolaires 1"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([kitsScolairesImg1, kitsScolairesImg2, kitsScolairesImg3]);
+                        setCurrentImageIndex(1);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={kitsScolairesImg2} 
+                        alt="Distribution Kits Scolaires 2"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([kitsScolairesImg1, kitsScolairesImg2, kitsScolairesImg3]);
+                        setCurrentImageIndex(2);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={kitsScolairesImg3} 
+                        alt="Distribution Kits Scolaires 3"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                  </>
+                )}
+                
                 {action.titre.toLowerCase().includes('korité') && (
                   <>
                     <div className="rounded-lg overflow-hidden bg-muted">
@@ -233,6 +298,14 @@ const ActionDetails = () => {
                 )}
               </div>
             </div>
+
+            <ImageLightbox
+              images={galleryImages}
+              isOpen={lightboxOpen}
+              currentIndex={currentImageIndex}
+              onClose={() => setLightboxOpen(false)}
+              onNavigate={setCurrentImageIndex}
+            />
 
             <div className="bg-muted p-6 md:p-8 rounded-lg text-center">
               <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Soutenez nos actions</h3>
