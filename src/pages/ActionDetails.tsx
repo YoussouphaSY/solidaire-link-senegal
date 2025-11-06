@@ -189,36 +189,40 @@ const ActionDetails = () => {
                 )}
                 {action.titre.toLowerCase().includes('korité') && (
                   <>
-                    <div className="rounded-lg overflow-hidden">
+                    <div className="rounded-lg overflow-hidden bg-muted">
                       <video 
                         controls
+                        preload="metadata"
                         className="w-full aspect-video object-cover"
                       >
                         <source src={videoKorite1} type="video/mp4" />
                         Votre navigateur ne supporte pas la lecture de vidéos.
                       </video>
                     </div>
-                    <div className="rounded-lg overflow-hidden">
+                    <div className="rounded-lg overflow-hidden bg-muted">
                       <video 
                         controls
+                        preload="metadata"
                         className="w-full aspect-video object-cover"
                       >
                         <source src={videoKorite2} type="video/mp4" />
                         Votre navigateur ne supporte pas la lecture de vidéos.
                       </video>
                     </div>
-                    <div className="rounded-lg overflow-hidden">
+                    <div className="rounded-lg overflow-hidden bg-muted">
                       <video 
                         controls
+                        preload="metadata"
                         className="w-full aspect-video object-cover"
                       >
                         <source src={videoKorite3} type="video/mp4" />
                         Votre navigateur ne supporte pas la lecture de vidéos.
                       </video>
                     </div>
-                    <div className="rounded-lg overflow-hidden">
+                    <div className="rounded-lg overflow-hidden bg-muted">
                       <video 
                         controls
+                        preload="metadata"
                         className="w-full aspect-video object-cover"
                       >
                         <source src={videoKorite4} type="video/mp4" />
