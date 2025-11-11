@@ -242,11 +242,11 @@ const Contact = () => {
                 {formType === "adhesion" && (
                   <Card>
                     <CardHeader>
-                      <CardTitle>Cotisation annuelle</CardTitle>
+                      <CardTitle>Cotisation mensuelle</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="text-center">
-                        <div className="text-4xl font-bold text-primary mb-2">5,000 FCFA</div>
+                        <div className="text-4xl font-bold text-primary mb-2">2,000 FCFA</div>
                         <p className="text-sm text-muted-foreground">Par an</p>
                         <div className="mt-4 p-4 bg-muted/50 rounded-lg">
                           <p className="text-xs text-muted-foreground">
