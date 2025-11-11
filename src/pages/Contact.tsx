@@ -83,7 +83,7 @@ const Contact = () => {
                 <CardContent className="pt-6">
                   <Phone className="h-8 w-8 mx-auto mb-3 text-secondary" />
                   <p className="text-sm font-medium mb-1">Téléphone</p>
-                  <p className="text-xs text-muted-foreground">+221 XX XXX XX XX</p>
+                  <p className="text-xs text-muted-foreground">+221 78 841 63 14</p>
                 </CardContent>
               </Card>
               <Card className="text-center border-none shadow-sm">
@@ -97,7 +97,7 @@ const Contact = () => {
                 <CardContent className="pt-6">
                   <MessageCircle className="h-8 w-8 mx-auto mb-3 text-primary" />
                   <p className="text-sm font-medium mb-1">WhatsApp</p>
-                  <a href="https://wa.me/221XXXXXXXXX" className="text-xs text-muted-foreground hover:text-primary">
+                  <a href="https://wa.me/221788416314" className="text-xs text-muted-foreground hover:text-primary">
                     Nous contacter
                   </a>
                 </CardContent>
