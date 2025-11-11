@@ -44,8 +44,8 @@ const Contribuer = () => {
     nom: "Mariama Sy",
     telephone: "+221 77 123 67 91",
     email: "contact@unionsolidaire.org",
-    wave: "+221 77 123 45 67",
-    orangeMoney: "+221 77 123 45 67"
+    wave: "+221 77 123 67 91",
+    orangeMoney: "+221 77 123 67 91"
   };
 
   return (
