@@ -41,8 +41,8 @@ const Contribuer = () => {
   };
 
   const contactInfo = {
-    nom: "Amadou Diallo",
-    telephone: "+221 77 123 45 67",
+    nom: "Aladji SARR",
+    telephone: "+221 77 841 63 14",
     email: "contact@unionsolidaire.org",
     wave: "+221 77 123 45 67",
     orangeMoney: "+221 77 123 45 67"
