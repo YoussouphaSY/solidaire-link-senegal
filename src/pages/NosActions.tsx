@@ -15,6 +15,7 @@ import koriteTalibesImg2 from "@/assets/korite-talibes-2.jpg";
 import kitsScolairesImg1 from "@/assets/kits-scolaires-1.jpg";
 import kitsScolairesImg2 from "@/assets/kits-scolaires-2.jpg";
 import kitsScolairesImg3 from "@/assets/kits-scolaires-3.jpg";
+import pullsTalibesJan from "@/assets/pulls-talibes-jan-1.jpg";
 
 const NosActions = () => {
   const { data: actions = [] } = useQuery({
@@ -35,6 +36,7 @@ const NosActions = () => {
     if (titre.includes('kits de korité') && titre.includes('familles')) return koriteFamillesImg;
     if (titre.includes('vêtements') && titre.includes('talibés')) return koriteTalibesImg1;
     if (titre.includes('kits scolaires')) return kitsScolairesImg1;
+    if (titre.includes('pulls') || titre.includes('set-setal') || titre.includes('solidaire')) return pullsTalibesJan;
     
     // Fallback selon catégorie
     if (action.categorie === "Environnement") return treeImage;
