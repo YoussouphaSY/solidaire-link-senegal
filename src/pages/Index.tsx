@@ -24,6 +24,9 @@ import koriteTalibesImg2 from "@/assets/korite-talibes-2.jpg";
 import kitsScolairesImg1 from "@/assets/kits-scolaires-1.jpg";
 import kitsScolairesImg2 from "@/assets/kits-scolaires-2.jpg";
 import kitsScolairesImg3 from "@/assets/kits-scolaires-3.jpg";
+import pullsTalibesJan from "@/assets/pulls-talibes-jan-1.jpg";
+import videoJan1 from "@/assets/video-jan-1.mp4";
+import videoKorite1 from "@/assets/video-korite-1.mp4";
 
 const Index = () => {
   const { data: recentActions = [] } = useQuery({
@@ -45,6 +48,7 @@ const Index = () => {
     if (titre.includes('kits de korité') && titre.includes('familles')) return koriteFamillesImg;
     if (titre.includes('vêtements') && titre.includes('talibés')) return koriteTalibesImg1;
     if (titre.includes('kits scolaires')) return kitsScolairesImg1;
+    if (titre.includes('pulls') || titre.includes('set-setal') || titre.includes('3 janvier')) return pullsTalibesJan;
     return educationImage;
   };
 
@@ -111,7 +115,7 @@ const Index = () => {
                 <div className="relative h-[500px] md:h-[600px]">
                   <div className="absolute inset-0 bg-black">
                     <video 
-                      src="https://kmacqgbyltcpgdhudenp.supabase.co/storage/v1/object/public/videos/sample-video.mp4"
+                      src={videoKorite1}
                       className="w-full h-full object-cover opacity-70"
                       autoPlay
                       muted
@@ -125,6 +129,36 @@ const Index = () => {
                     </h1>
                     <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
                       Découvrez nos actions sur le terrain
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Link to="/nos-actions">
+                        <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto">
+                          Voir nos actions
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem>
+                <div className="relative h-[500px] md:h-[600px]">
+                  <div className="absolute inset-0 bg-black">
+                    <video 
+                      src={videoJan1}
+                      className="w-full h-full object-cover opacity-70"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  </div>
+                  <div className="container mx-auto text-center space-y-6 relative z-10 h-full flex flex-col justify-center px-4">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white animate-fade-in">
+                      Set-Setal Janvier 2026
+                    </h1>
+                    <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+                      Nettoyage et distribution de pulls aux talibés
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <Link to="/nos-actions">
