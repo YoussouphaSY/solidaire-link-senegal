@@ -21,6 +21,17 @@ import videoKorite1 from "@/assets/video-korite-1.mp4";
 import videoKorite2 from "@/assets/video-korite-2.mp4";
 import videoKorite3 from "@/assets/video-korite-3.mp4";
 import videoKorite4 from "@/assets/video-korite-4.mp4";
+// Janvier 2026 - Set-Setal et Pulls
+import setsetalJan1 from "@/assets/setsetal-jan-1.jpg";
+import setsetalJan2 from "@/assets/setsetal-jan-2.jpg";
+import setsetalJan3 from "@/assets/setsetal-jan-3.jpg";
+import setsetalJan4 from "@/assets/setsetal-jan-4.jpg";
+import setsetalJan5 from "@/assets/setsetal-jan-5.jpg";
+import pullsTalibesJan1 from "@/assets/pulls-talibes-jan-1.jpg";
+import pullsTalibesJan2 from "@/assets/pulls-talibes-jan-2.jpg";
+import videoJan1 from "@/assets/video-jan-1.mp4";
+import videoJan2 from "@/assets/video-jan-2.mp4";
+import videoJan3 from "@/assets/video-jan-3.mp4";
 
 const ActionDetails = () => {
   const { id } = useParams();
@@ -47,6 +58,7 @@ const ActionDetails = () => {
     if (titre.includes('kits de korité') && titre.includes('familles')) return koriteFamillesImg;
     if (titre.includes('vêtements') && titre.includes('talibés')) return koriteTalibesImg1;
     if (titre.includes('kits scolaires')) return kitsScolairesImg1;
+    if (titre.includes('pulls') || titre.includes('set-setal') || titre.includes('3 janvier')) return pullsTalibesJan1;
     
     // Fallback selon catégorie
     if (action.categorie === "Environnement") return treeImage;
@@ -291,6 +303,143 @@ const ActionDetails = () => {
                         className="w-full aspect-video object-cover"
                       >
                         <source src={videoKorite4} type="video/mp4" />
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                      </video>
+                    </div>
+                  </>
+                )}
+
+                {/* Journée Set-Setal et Distribution Pulls - Janvier 2026 */}
+                {(action.titre.toLowerCase().includes('pulls') || action.titre.toLowerCase().includes('set-setal') || action.titre.toLowerCase().includes('janvier 2026')) && (
+                  <>
+                    {/* Photos */}
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([pullsTalibesJan1, pullsTalibesJan2, setsetalJan1, setsetalJan2, setsetalJan3, setsetalJan4, setsetalJan5]);
+                        setCurrentImageIndex(0);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={pullsTalibesJan1} 
+                        alt="Distribution pulls talibés"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([pullsTalibesJan1, pullsTalibesJan2, setsetalJan1, setsetalJan2, setsetalJan3, setsetalJan4, setsetalJan5]);
+                        setCurrentImageIndex(1);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={pullsTalibesJan2} 
+                        alt="Distribution aux talibés"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([pullsTalibesJan1, pullsTalibesJan2, setsetalJan1, setsetalJan2, setsetalJan3, setsetalJan4, setsetalJan5]);
+                        setCurrentImageIndex(2);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={setsetalJan1} 
+                        alt="Set-Setal nettoyage"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([pullsTalibesJan1, pullsTalibesJan2, setsetalJan1, setsetalJan2, setsetalJan3, setsetalJan4, setsetalJan5]);
+                        setCurrentImageIndex(3);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={setsetalJan2} 
+                        alt="Opération Set-Setal"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([pullsTalibesJan1, pullsTalibesJan2, setsetalJan1, setsetalJan2, setsetalJan3, setsetalJan4, setsetalJan5]);
+                        setCurrentImageIndex(4);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={setsetalJan3} 
+                        alt="Nettoyage du quartier"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([pullsTalibesJan1, pullsTalibesJan2, setsetalJan1, setsetalJan2, setsetalJan3, setsetalJan4, setsetalJan5]);
+                        setCurrentImageIndex(5);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={setsetalJan4} 
+                        alt="Volontaires Set-Setal"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div 
+                      className="rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => {
+                        setGalleryImages([pullsTalibesJan1, pullsTalibesJan2, setsetalJan1, setsetalJan2, setsetalJan3, setsetalJan4, setsetalJan5]);
+                        setCurrentImageIndex(6);
+                        setLightboxOpen(true);
+                      }}
+                    >
+                      <img 
+                        src={setsetalJan5} 
+                        alt="Équipe de nettoyage"
+                        className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    
+                    {/* Vidéos */}
+                    <div className="rounded-lg overflow-hidden bg-muted">
+                      <video 
+                        controls
+                        preload="metadata"
+                        className="w-full aspect-video object-cover"
+                      >
+                        <source src={videoJan1} type="video/mp4" />
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                      </video>
+                    </div>
+                    <div className="rounded-lg overflow-hidden bg-muted">
+                      <video 
+                        controls
+                        preload="metadata"
+                        className="w-full aspect-video object-cover"
+                      >
+                        <source src={videoJan2} type="video/mp4" />
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                      </video>
+                    </div>
+                    <div className="rounded-lg overflow-hidden bg-muted">
+                      <video 
+                        controls
+                        preload="metadata"
+                        className="w-full aspect-video object-cover"
+                      >
+                        <source src={videoJan3} type="video/mp4" />
                         Votre navigateur ne supporte pas la lecture de vidéos.
                       </video>
                     </div>
